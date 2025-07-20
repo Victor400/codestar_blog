@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+DEBUG = False
 
 from pathlib import Path
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-ng)lzz)1ivm78&eul$uqpuvmxkl8gfj-zm1f@f!-es%-idey2+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://codestar-blog-production-d2449a1dd039.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
