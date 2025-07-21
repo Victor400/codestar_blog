@@ -27,8 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ng)lzz)1ivm78&eul$uqpuvmxkl8gfj-zm1f@f!-es%-idey2+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = False
+#DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 
 ALLOWED_HOSTS = ['codestar-blog-production-d2449a1dd039.herokuapp.com', '127.0.0.1']
