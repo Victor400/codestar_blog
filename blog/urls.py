@@ -1,7 +1,7 @@
+# blog/urls.py
 from django.urls import path
-from .views import my_blog
+from . import views
 
 urlpatterns = [
-    path('', my_blog, name='my_blog'),
+    path('', views.home, name='home'),  # This maps the root of /blog/
 ]
-
