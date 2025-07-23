@@ -29,8 +29,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-default-key")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = False
+#DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 
 ALLOWED_HOSTS = ['codestar-blog-production-d2449a1dd039.herokuapp.com', '127.0.0.1']
@@ -106,11 +106,9 @@ else:
         }
     }
 
-    CSRF_TRUSTED_ORIGINS = [
-    "https://codestar-blog-production.herokuapp.com",
-    "https://your-workspace.codeinstitute-ide.net"
+CSRF_TRUSTED_ORIGINS = [
+    "https://codestar-blog-production-d2449a1dd039.herokuapp.com"
 ]
-
 
 
 # Password validation
