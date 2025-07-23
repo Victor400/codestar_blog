@@ -11,8 +11,6 @@ For the full list of settings and their values, see
 https://docs.djangoproj
 
 """
-
-
 import os
 from pathlib import Path
 import dj_database_url
@@ -27,7 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-default-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+#DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = False
+
 
 ALLOWED_HOSTS = [
     'codestar-blog-production-d2449a1dd039.herokuapp.com',
