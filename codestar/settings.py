@@ -106,6 +106,12 @@ else:
         }
     }
 
+    CSRF_TRUSTED_ORIGINS = [
+    "https://codestar-blog-production-d2449a1dd039.herokuapp.com",
+    "https://your-workspace.codeinstitute-ide.net"
+]
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
