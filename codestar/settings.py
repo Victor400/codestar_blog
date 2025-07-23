@@ -107,7 +107,7 @@ else:
     }
 
     CSRF_TRUSTED_ORIGINS = [
-    "https://codestar-blog-production-d2449a1dd039.herokuapp.com",
+    "https://codestar-blog-production.herokuapp.com",
     "https://your-workspace.codeinstitute-ide.net"
 ]
 
