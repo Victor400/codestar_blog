@@ -9,3 +9,8 @@ node_modules/
 cloudinary_python.txt
 .venv
 /staticfiles/
+__pycache__/
+*.pyc
+db.sqlite3
+*.sqlite3
+
