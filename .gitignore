@@ -13,4 +13,13 @@ __pycache__/
 *.pyc
 db.sqlite3
 *.sqlite3
+# Ignore SSL certificate and key files
+cert.pem
+key.pem
+cert.crt
+
+# Or ignore all PEM/key files anywhere
+*.pem
+*.key
+
 
