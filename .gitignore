@@ -9,6 +9,12 @@ node_modules/
 cloudinary_python.txt
 .venv
 /staticfiles/
+blog/fixtures/
+# Ignore fixture files
+*.json
+# OR, more specific:
+fixtures/posts.json
+
 __pycache__/
 *.pyc
 db.sqlite3
