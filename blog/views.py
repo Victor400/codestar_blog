@@ -1,28 +1,51 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Post
+from django.contrib import messages
+from .forms import CommentForm
+
 
 class PostList(generic.ListView):
-    #queryset = Post.objects.filter(status=1)  # Only show published posts
-    model = Post  # not queryset=Post.objects.filter(...)
+    model = Post
     template_name = "blog/index.html"
     paginate_by = 6
-    context_object_name = "posts"  # <== This must match your template loop
+    context_object_name = "posts"
 
-    from django.shortcuts import render, get_object_or_404  # ✅ Step 6
+    def get_queryset(self):
+        return Post.objects.filter(status=1)
+
 
 def post_detail(request, slug):
     """
-    Display an individual :model:`blog.Post`.
+    Display an individual blog post with its comments.
     """
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
 
+    comments = post.comments.filter(approved=True).order_by("-created_on")
+    comment_count = comments.count()
+    comment_form = CommentForm()
+
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            messages.add_message(
+            request, messages.SUCCESS,
+            'Comment submitted and awaiting approval'
+    )
+            comment_form = CommentForm()  # Reset the form after saving
+
     return render(
         request,
         "blog/post_detail.html",
-        {"post": post},
+        {
+            "post": post,
+            "comments": comments,
+            "comment_count": comment_count,
+            "comment_form": comment_form,
+        },
     )
-
-    
-    
