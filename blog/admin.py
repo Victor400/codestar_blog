@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Post, Comment
 from django_summernote.admin import SummernoteModelAdmin 
-
 from django.utils.timezone import localtime
 
 @admin.register(Post)
@@ -15,3 +14,13 @@ class PostAdmin(SummernoteModelAdmin):
     def created_on_display(self, obj):
         return localtime(obj.created_on).strftime('%Y-%m-%d %H:%M')
     created_on_display.short_description = 'Created On'
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('post', 'author', 'body', 'approved', 'created_on')
+    list_filter = ('approved', 'created_on')
+    search_fields = ('author__username', 'body')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(approved=True)
