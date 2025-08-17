@@ -5,6 +5,9 @@ from cloudinary.models import CloudinaryField
 
 
 def create_unique_slug(instance, title):
+    """
+    Generate a unique slug for a Post instance.
+    """
     slug = slugify(title)
     cls = instance.__class__
     count = 1
@@ -16,31 +19,32 @@ def create_unique_slug(instance, title):
 
     return unique_slug
 
+
 STATUS = ((0, "Draft"), (1, "Published"))
 
+
 class Post(models.Model):
-    title       = models.CharField(max_length=200, unique=True)
-    slug        = models.SlugField(max_length=200, unique=True)
-    author      = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
-    excerpt     = models.TextField(blank=True)
-    updated_on  = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
+    excerpt = models.TextField(blank=True)
+    updated_on = models.DateTimeField(auto_now=True)
     featured_image = CloudinaryField('image', default='placeholder')
-    content     = models.TextField(default='Placeholder content')
-    created_on  = models.DateTimeField(auto_now_add=True)
-    status      = models.IntegerField(choices=STATUS, default=0)
+    content = models.TextField(default='Placeholder content')
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
         ordering = ['-created_on']  # Newest posts appear first
 
     def save(self, *args, **kwargs):
+        """Automatically generate a slug if not set."""
         if not self.slug:
             self.slug = create_unique_slug(self, self.title)
         super().save(*args, **kwargs)
-    
+
     def __str__(self):
         return f"{self.title} | written by {self.author}"
-
-
 
 
 class Comment(models.Model):
@@ -60,6 +64,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ["created_on"]
-    
+
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
